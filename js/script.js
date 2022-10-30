@@ -48,6 +48,7 @@ for (i = square.length; i > 0; --i) {
 function valueChange(mouseEvent) {
     if (mouseEvent.type == "mouseup") mouseDown = false;
     if (mouseEvent.type == "mousedown") mouseDown = true;
+    if (mouseDown == false) return;
     console.log(mouseDown);
     console.log(mouseEvent.type);
     if (mouseDown == true) {
