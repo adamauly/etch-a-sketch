@@ -23,13 +23,13 @@ grid.setAttribute("style", "display:flex; flex-shrink:0; flex-wrap:wrap; height:
     + "width:768px; display:flex; border:4px solid black; background:white"
 );
 
-let gridSize = 4;
+let gridSize = 16;
 let squareSize = 768 / gridSize - 2;
 
 for (i = gridSize**2; i > 0; --i) {
     let square = document.createElement("div");
     square.setAttribute("class", "square");
-    square.setAttribute("style", `border:1px solid black; opacity:8%; backgound-color:red`
+    square.setAttribute("style", `border:1px solid rgb(225, 225, 225); backgound-color:red`
         + `height:${squareSize}px; width:${squareSize}px`);
         grid.appendChild(square);
 };
@@ -39,18 +39,19 @@ let mouseDown = false;
 
 for (i = square.length; i > 0; --i) {
     square.forEach((pixel) => {
-        pixel.addEventListener("mousedown", function (e) {
-            mouseDown = true;
-            e.target.style.background = "black"
-        })
-        pixel.addEventListener("mouseup", function (d) {
-            mouseDown = false;
-            console.log(mouseDown);
-        })
-        pixel.addEventListener("mouseenter", function (e) {
-            if (mouseDown == true) e.target.style.background = "black";
-        });
+        pixel.addEventListener("mousedown", valueChange);
+        pixel.addEventListener("mouseup", valueChange);
+        pixel.addEventListener("mouseenter", valueChange);
     });
 };
 
-console.log(mouseDown);
+function valueChange(mouseEvent) {
+    if (mouseEvent.type == "mouseup") mouseDown = false;
+    if (mouseEvent.type == "mousedown") mouseDown = true;
+    console.log(mouseDown);
+    console.log(mouseEvent.type);
+    if (mouseDown == true) {
+        mouseEvent.target.style.background = "black";
+    };
+};
+
