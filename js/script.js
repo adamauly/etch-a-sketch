@@ -53,6 +53,7 @@ function valueChange(mouseEvent) {
     console.log(mouseEvent.type);
     if (mouseDown == true) {
         mouseEvent.target.style.background = "black";
+        mouseEvent.target.style.border = "1px solid black";
     };
 };
 
