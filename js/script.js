@@ -6,7 +6,7 @@ let sidebar = document.createElement("div");
 
 flexContainer.setAttribute("style", "display:flex");
 body.appendChild(flexContainer);
-flexContainer.setAttribute("style", "display:flex; text-align:top;"
+flexContainer.setAttribute("style", "display:flex;"
     + "align-items:flex-start; margin-top:64px"
 );
 
@@ -20,17 +20,37 @@ sidebar.appendChild(header);
 grid.setAttribute("class", "grid");
 flexContainer.appendChild(grid);
 grid.setAttribute("style", "display:flex; flex-shrink:0; flex-wrap:wrap; height:768px;"
-    + "width:768px; display:flex; border:4px solid black; background:white;"
+    + "width:768px; display:flex; border:4px solid black; background:white"
 );
 
-let gridSize = 16;
+let gridSize = 4;
 let squareSize = 768 / gridSize - 2;
 
 for (i = gridSize**2; i > 0; --i) {
     let square = document.createElement("div");
     square.setAttribute("class", "square");
-    square.setAttribute("style", `border:1px solid black; opacity:8%;`
+    square.setAttribute("style", `border:1px solid black; opacity:8%; backgound-color:red`
         + `height:${squareSize}px; width:${squareSize}px`);
-    grid.appendChild(square);
+        grid.appendChild(square);
 };
 
+let square = document.querySelectorAll(".square");
+let mouseDown = false;
+
+for (i = square.length; i > 0; --i) {
+    square.forEach((pixel) => {
+        pixel.addEventListener("mousedown", function (e) {
+            mouseDown = true;
+            e.target.style.background = "black"
+        })
+        pixel.addEventListener("mouseup", function (d) {
+            mouseDown = false;
+            console.log(mouseDown);
+        })
+        pixel.addEventListener("mouseenter", function (e) {
+            if (mouseDown == true) e.target.style.background = "black";
+        });
+    });
+};
+
+console.log(mouseDown);
