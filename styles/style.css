@@ -1,0 +1,20 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    background-color: gold;
+}
+
+/* .grid{
+    border: 1px solid black;
+    display: flex;
+    flex-wrap: wrap;
+    height: 768px;
+    width: 768px;
+} */
+
+/* .square {
+    border: 1px solid black;
+    height: 22px;
+    width: 22px;
+} */
