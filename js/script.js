@@ -1,17 +1,31 @@
 let grid = document.querySelector(".grid");
 let resolution = document.querySelector(".resolution");
-let gridResolution = 64;
-let squareSize = 512 / gridResolution;
+let gridResolution = 32;
 let mouseDown = false;
+let clearBtn = document.querySelector(".clear");
 
 resolution.addEventListener("click", (e) => {
-    gridResolution = prompt("Input an integer between 1 and 64: ");
+    let res = prompt("Input an integer between 1 and 64: ");
+    createGrid(res, squareSize(res));
 });
 
-function createGrid(res) {
-    console.log("create")
+clearBtn.addEventListener   ("click", (e) => {
+    createGrid(gridResolution, squareSize(gridResolution));
+});
+
+function squareSize(res) {
+    console.log("square size is: " + 512 / res)
+    return 512 / res
+};
+
+function createGrid(res, squareSize) {
+    let square = document.querySelectorAll(".square");
+    square.forEach(sqr => {
+        sqr.remove();
+    });
+    console.log("createGrid at " +res+ "px resolution")
     for (i = res**2; i > 0; --i) {
-        let square = document.createElement("div");
+        square = document.createElement("div");
         square.classList.add("square");
         square.setAttribute("style", `height:${squareSize}px; width:${squareSize}px`);
         grid.appendChild(square);
@@ -21,6 +35,7 @@ function createGrid(res) {
             e.preventDefault();
         });
     };
+
 };
 
 document.body.onpointerup = function() {
@@ -41,10 +56,10 @@ function toggleGrid() {
 
 };
 
+
+
 window.onload = () => {
-    console.log("load");
-    console.log(gridResolution);
-    createGrid(gridResolution);
+    createGrid(gridResolution, squareSize(gridResolution));
 }
 
 // for (i = square.length; i > 0; --i) {
