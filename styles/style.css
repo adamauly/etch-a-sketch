@@ -16,7 +16,7 @@ button {
     padding: 8px;
     border: 0;
     transform: scale(0.99);
-    transition: 0.3s;
+    transition: 0.2s;
     background-color: honeydew;
 }
 
@@ -24,7 +24,7 @@ button {
     color: honeydew;
     font-size: 64px;
     background-color: transparent;
-    text-shadow: -1px 1px 1px black, 1px -1px 0 black;
+    text-shadow: -1px 1px 1px black, 1px -1px 0 #000000;
 }
 
 .clear:hover{
@@ -123,6 +123,11 @@ to {
     transform: scale(1.3);
     margin-right: 20px;
     animation: move 52s linear infinite;
+}
+
+.rainbow:active {
+    box-shadow: 0 0 0;
+    color: yellow;
 }
 
 .flexContainer {

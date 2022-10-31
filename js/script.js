@@ -1,16 +1,35 @@
-let grid = document.querySelector(".grid");
-let resolution = document.querySelector(".resolution");
-let gridResolution = 32;
-let mouseDown = false;
-let clearBtn = document.querySelector(".clear");
+const DEF_COLOUR = "rgb(0, 0, 0)";
+const DEF_RESOLUTION = 32; 
 
-resolution.addEventListener("click", (e) => {
+let colour = DEF_COLOUR;
+let gridResolution = DEF_RESOLUTION;
+let grid = document.querySelector(".grid");
+let resolutionBtn = document.querySelector(".resolution");
+let clearBtn = document.querySelector(".clear");
+let rainbowBtn = document.querySelector(".rainbow");
+let body = document.querySelector("body");
+let mouseDown = false;
+let rainbowMode = false;
+
+resolutionBtn.addEventListener("click", (e) => {
     let res = prompt("Input an integer between 1 and 64: ");
     createGrid(res, squareSize(res));
 });
 
-clearBtn.addEventListener   ("click", (e) => {
+clearBtn.addEventListener("click", (e) => {
     createGrid(gridResolution, squareSize(gridResolution));
+});
+
+
+rainbowBtn.addEventListener("click", (e) => {
+    if (rainbowMode == true){
+      rainbowMode = false;
+      colour = DEF_COLOUR;
+      console.log(colour)
+    } else {
+        rainbowMode = true;
+        body.setAttribute("style", "background-color:");
+    }
 });
 
 function squareSize(res) {
@@ -29,8 +48,8 @@ function createGrid(res, squareSize) {
         square.classList.add("square");
         square.setAttribute("style", `height:${squareSize}px; width:${squareSize}px`);
         grid.appendChild(square);
-        square.addEventListener("pointerdown", valueChange);    
-        square.addEventListener("pointerover", valueChange);
+        square.addEventListener("pointerdown", paint);    
+        square.addEventListener("pointerover", paint);
         square.addEventListener("dragstart", function (e){
             e.preventDefault();
         });
@@ -42,31 +61,46 @@ document.body.onpointerup = function() {
     mouseDown = false;
 };
 
-function valueChange(mouseEvent) {
+function paint(mouseEvent) {
     if (mouseEvent.type == "pointerdown") mouseDown = true;
     if (mouseDown == false) return;
     console.log(mouseDown);
     console.log(mouseEvent.type);
     if (mouseDown == true) {
-        mouseEvent.target.style.background = "black";
+        if (rainbowMode == true) {
+            console.log("colour change")
+            changeColour();
+        }
+        mouseEvent.target.style.background = colour;
     };
 };
 
-function toggleGrid() {
+function changeColour() {
+    if (rainbowMode == true) {
+        console.log("HERE");
+        colour = `rgb(${randInt()}, ${randInt()}, ${randInt()})`;
+    };
+}
 
+function randInt() {
+    return Math.floor(Math.random () * 255)
 };
-
-
 
 window.onload = () => {
     createGrid(gridResolution, squareSize(gridResolution));
 }
 
+// function toggleGrid() {
+
+// };
+ 
+// ==============================================
+
 // for (i = square.length; i > 0; --i) {
 //     square.forEach((pixel) => {
-//         pixel.addEventListener("pointerdown", valueChange);    
-//         pixel.addEventListener("pointerup", valueChange);
-//         pixel.addEventListener("pointerover", valueChange);
+//         pixel.addEventListener("pointerdown", paint);    
+//         pixel.addEventListener("pointerup", paint);
+//         pixel.addEventListener("pointerover", paint);
 //         pixel.addEventListener("dragstart", function (e){
 //             e.preventDefault();
 //         });
@@ -117,16 +151,16 @@ window.onload = () => {
 
 // for (i = square.length; i > 0; --i) {
 //     square.forEach((pixel) => {
-//         pixel.addEventListener("pointerdown", valueChange);    
-//         pixel.addEventListener("pointerup", valueChange);
-//         pixel.addEventListener("pointerover", valueChange);
+//         pixel.addEventListener("pointerdown", paint);    
+//         pixel.addEventListener("pointerup", paint);
+//         pixel.addEventListener("pointerover", paint);
 //         pixel.addEventListener("dragstart", function (e){
 //             e.preventDefault();
 //         });
 //     });
 // };
 
-// function valueChange(mouseEvent) {
+// function paint(mouseEvent) {
 //     if (mouseEvent.type == "pointerup") mouseDown = false;
 //     if (mouseEvent.type == "pointerdown") mouseDown = true;
 //     if (mouseDown == false) return;
