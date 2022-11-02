@@ -1,8 +1,6 @@
 const DEF_COLOUR = "rgb(0, 0, 0)";
 const DEF_RESOLUTION = 32; 
 
-let colour = DEF_COLOUR;
-let gridResolution = DEF_RESOLUTION;
 let grid = document.querySelector(".grid");
 let resolutionBtn = document.querySelector(".resolution");
 let clearBtn = document.querySelector(".clear");
@@ -11,8 +9,15 @@ let body = document.querySelector("body");
 let mouseDown = false;
 let rainbowMode = false;
 
+let colour = DEF_COLOUR;
+let gridResolution = DEF_RESOLUTION;
+
+
 resolutionBtn.addEventListener("click", (e) => {
     let res = prompt("Input an integer between 1 and 64: ");
+    console.log(parseInt(res)) ;
+    if (res != null || parseInt(res) == 'NaN') return;
+    if (res > 64) res = 64;
     createGrid(res, squareSize(res));
 });
 
