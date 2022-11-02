@@ -16,7 +16,7 @@ let gridResolution = DEF_RESOLUTION;
 resolutionBtn.addEventListener("click", (e) => {
     let res = prompt("Input an integer between 1 and 64: ");
     console.log(parseInt(res)) ;
-    if (res != null || parseInt(res) == 'NaN') return;
+    if (res == null || parseInt(res) == 'NaN') return;
     if (res > 64) res = 64;
     createGrid(res, squareSize(res));
 });
