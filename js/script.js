@@ -48,7 +48,7 @@ function createGrid(res, squareSize) {
         sqr.remove();
     });
     console.log("createGrid at " +res+ "px resolution")
-    for (i = res**2; i > 0; --i) {
+    for (let i = res**2; i > 0; --i) {
         square = document.createElement("div");
         square.classList.add("square");
         square.setAttribute("style", `height:${squareSize}px; width:${squareSize}px`);
